@@ -1,0 +1,62 @@
+ltrace ./hello3:
+
+
+dlopen("./libHello.so", 1)                       = 0x562ab443b280
+dlsym(0x562ab443b280, "print")                   = 0
+puts("Library was not loaded "Library was not loaded 
+)                  = 24
++++ exited (status 0) +++
+
+
+strace .\hello3:
+
+execve("./hello3", ["./hello3"], 0x7fffb46a4cd0 /* 54 vars */) = 0
+brk(NULL)                               = 0x5641e91a0000
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=80840, ...}) = 0
+mmap(NULL, 80840, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f775f7b5000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdl.so.2", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\16\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=14560, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f775f7b3000
+mmap(NULL, 2109712, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f775f39e000
+mprotect(0x7f775f3a1000, 2093056, PROT_NONE) = 0
+mmap(0x7f775f5a0000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7f775f5a0000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\260\34\2\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=2030544, ...}) = 0
+mmap(NULL, 4131552, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f775efad000
+mprotect(0x7f775f194000, 2097152, PROT_NONE) = 0
+mmap(0x7f775f394000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f775f394000
+mmap(0x7f775f39a000, 15072, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f775f39a000
+close(3)                                = 0
+mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f775f7b0000
+arch_prctl(ARCH_SET_FS, 0x7f775f7b0740) = 0
+mprotect(0x7f775f394000, 16384, PROT_READ) = 0
+mprotect(0x7f775f5a0000, 4096, PROT_READ) = 0
+mprotect(0x5641e7c42000, 4096, PROT_READ) = 0
+mprotect(0x7f775f7c9000, 4096, PROT_READ) = 0
+munmap(0x7f775f7b5000, 80840)           = 0
+brk(NULL)                               = 0x5641e91a0000
+brk(0x5641e91c1000)                     = 0x5641e91c1000
+openat(AT_FDCWD, "./libHello.so", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0@\5\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0775, st_size=7912, ...}) = 0
+getcwd("/home/oriya/Desktop/C/ex1", 128) = 26
+mmap(NULL, 2101296, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f775edab000
+mprotect(0x7f775edac000, 2093056, PROT_NONE) = 0
+mmap(0x7f775efab000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0) = 0x7f775efab000
+close(3)                                = 0
+mprotect(0x7f775efab000, 4096, PROT_READ) = 0
+fstat(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 1), ...}) = 0
+write(1, "Library was not loaded \n", 24Library was not loaded 
+) = 24
+exit_group(0)                           = ?
++++ exited with 0 +++
+
